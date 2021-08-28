@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Adapter.Onclicklistner {
+public class MainActivity extends AppCompatActivity implements Adapter.Onclicklistner, Adapter.Buttonlistner {
     private static final String TAG = "MainActivity";
     private PackageManager manager;
     private RecyclerView recyclerView;
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.Onclickli
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter(this, applist);
         adapter.setOnitemclicklistner(this);
+        adapter.setButtonClicklistner(this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -114,4 +115,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
     });
     return true;
 }
+
+    @Override
+    public void buttononlcik(int position, String packagename) {
+        
     }
+}

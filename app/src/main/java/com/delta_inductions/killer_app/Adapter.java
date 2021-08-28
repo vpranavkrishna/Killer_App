@@ -23,6 +23,7 @@ private Context context;
 private PackageManager manager;
 private Onclicklistner onitemclicklistner;
 private List<ApplicationInfo> applistcopy;
+private Buttonlistner listner;
 
     public Adapter(Context context,List<ApplicationInfo> applist) {
         this.context = context;
@@ -115,7 +116,9 @@ private List<ApplicationInfo> applistcopy;
             btn_cache.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                int position = getAdapterPosition();
+                String packagename = applist.get(position).packageName;
+                        listner.buttononlcik(position,packagename);
                 }
             });
         }
@@ -130,4 +133,12 @@ private List<ApplicationInfo> applistcopy;
  {
      void onclick(int position,ApplicationInfo pkginfo);
  }
+public void setButtonClicklistner(Buttonlistner listner)
+{
+    this.listner = listner;
+}
+public interface Buttonlistner
+{
+    void buttononlcik(int position,String packagename);
+}
 }
