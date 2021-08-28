@@ -51,6 +51,16 @@
                 android:padding="16dp"
                 android:text="Hola"
                 android:textColor="@color/black" />
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/packagename"
+                android:id="@+id/clearcache"
+                android:text ="clear cache"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

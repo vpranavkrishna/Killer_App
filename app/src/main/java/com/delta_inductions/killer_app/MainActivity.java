@@ -1,5 +1,6 @@
 package com.delta_inductions.killer_app;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.ActivityManager;
@@ -8,6 +9,10 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,5 +93,25 @@ public class MainActivity extends AppCompatActivity implements Adapter.Onclickli
 //        }
 //        return false;
 //    }
-
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.searchmenu,menu);
+    MenuItem searchitem = menu.findItem(R.id.action_search);
+    androidx.appcompat.widget.SearchView searchView =(androidx.appcompat.widget.SearchView) searchitem.getActionView();
+    searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            searchView.setQueryHint("Search by App Name....");
+            adapter.getFilter().filter(newText);
+            return false;
+        }
+    });
+    return true;
+}
     }
