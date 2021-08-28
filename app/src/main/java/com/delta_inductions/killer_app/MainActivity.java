@@ -14,6 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
+
+import java.io.File;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,6 +121,48 @@ public boolean onCreateOptionsMenu(Menu menu) {
 
     @Override
     public void buttononlcik(int position, String packagename) {
-        
+        File cache = new File("/storage/emulated/0/Android/data/"+packagename+"/cache");
+        if(cache.exists())
+        {
+            cache.delete();
+            Toast.makeText(this, "cache deleted", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+        {
+            Toast.makeText(this, "cache not found", Toast.LENGTH_SHORT).show();
+        }
+
+//        try {
+//
+//            Context context = createPackageContext(packagename,CONTEXT_IGNORE_SECURITY);
+//            // PackageManager packageManager = context.getPackageManager();
+//
+//            Method getPackageSizeInfo = manager.getClass().getMethod(
+//                    "getPackageSizeInfo", String.class, IPackageStatsObserver.class);
+//
+//            getPackageSizeInfo.invoke(packageManager, runningTaskInfo.processName,
+//                    new IPackageStatsObserver.Stub() {
+//
+//                        @Override
+//                        public void onGetStatsCompleted(PackageStats pStats, boolean succeeded)
+//                                throws RemoteException {
+//
+//                            //Log.d("App_Size123","\n"+runningTaskInfo.loadLabel(packageManager)+"\t"+formatFileSize(String.valueOf(pStats.codeSize)));
+//                            Log.d("App_Size123","\n"+runningTaskInfo.loadLabel(packageManager)+"\t"+formatFileSize(String.valueOf(pStats.dataSize)));
+//                            //Log.d("App_Size123","\n"+runningTaskInfo.loadLabel(packageManager)+"\t"+formatFileSize(String.valueOf(pStats.cacheSize)));
+//                            //Log.d("App_Size123","\n"+runningTaskInfo.loadLabel(packageManager)+"\t"+formatFileSize(String.valueOf(pStats.externalDataSize)+"\n"));
+//                        }
+//                    });
+//
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
     }
 }
